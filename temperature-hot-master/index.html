@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Temperature Hot</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        body {
+            background: url(images/bg-image.jpg) no-repeat;
+            background-size: cover;
+            height: 100vh;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <form class="col-md-6 m-auto py-5">
+            <div class="input-group mb-3 input-div">
+                <input type="text" class="form-control " placeholder="Enter a location for Weather ..." id="input-place">
+                <div class="input-group-append">
+                    <button type="button" class="btn btn-danger button-id" id="button-id">Search</button>
+                </div>
+            </div>
+        </form>
+        <div class="weather-status text-white text-center">
+            <img src="https://openweathermap.org/img/wn/02d@2x.png" alt="">
+            <h1 id="city-change">Dhaka</h1>
+            <h3><span class="cloud">38.06</span>&deg;C</h3>
+            <h1 class="lead">Clouds</h1>
+        </div>
+    </div>
+    <script>
+        // const apiKey = 'b6cc4392568a3586e950307c86a22bbd';
+        // const apiBase = 'https://api.openweathermap.org/data;/2.5/weather'
+       
+       
+
+        
+        
+
+       
+        const button = document.querySelector(".button-id");
+        
+        const cloudField = document.querySelector(".cloud");
+    
+        
+    
+        button.addEventListener("click",function(){
+            const Input = document.getElementById("input-place").value;
+            
+            // const url = `${apiBase}?q='+Input.value+'&units=metric&appid=${apiKey}`;
+            fetch(`https://api.openweathermap.org/data/2.5/weather?q=${Input}&units=metric&appid=b6cc4392568a3586e950307c86a22bbd`)
+            .then(response => response.json())
+            .then(data => toServer(data))
+            
+            
+        })
+        function toServer(data){
+            const Input = document.getElementById("input-place").value;
+            const Place = document.getElementById("city-change");
+            Place.innerText = Input;
+            const tem = data.main.temp;
+            cloudField.innerText = tem;
+        }
+        
+    </script>
+
+</body>
+
+</html>
